@@ -1,4 +1,19 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fff7ed;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+::selection {
+  background: #fdba74;
+  color: #1f2937;
+}
+
+input::placeholder {
+  color: #a1a1aa;
 }
