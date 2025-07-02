@@ -13,6 +13,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [filterStatus, setFilterStatus] = useState("all");
   const [filterPriority, setFilterPriority] = useState("all");
+  const [loading, setLoading] = useState(false);
 
   const fetchTasks = async (token) => {
     const response = await fetch("https://todobackend-kqc1.onrender.com/tasks", {
@@ -33,6 +34,7 @@ function App() {
   };
 
   const addTask = async (text) => {
+    setLoading(true);
     const response = await fetch("https://todobackend-kqc1.onrender.com/tasks", {
       method: "POST",
       headers: {
@@ -43,6 +45,7 @@ function App() {
     });
     const newTask = await response.json();
     setTasks([...tasks, newTask]);
+    setLoading(false);
   };
 
   const deleteTask = async (id) => {
@@ -93,7 +96,7 @@ function App() {
   );
 
   const MainApp = () => (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100 flex flex-col font-[Poppins]">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-100 transition-all duration-500 ease-in-out font-[Poppins]">
       <nav className="bg-orange-500 text-white px-6 py-4 flex justify-between items-center shadow-md">
         <ul className="flex space-x-4">
           <li>
@@ -105,12 +108,22 @@ function App() {
             </a>
           </li>
         </ul>
-        <button
-          onClick={logout}
-          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded-full shadow transition-colors duration-200"
-        >
-          Logout
-        </button>
+        <div className="flex gap-2 items-center">
+          <button
+            onClick={() => {
+              document.documentElement.classList.toggle("dark");
+            }}
+            className="px-4 py-2 bg-black/80 text-white rounded-full shadow hover:bg-black/90 transition"
+          >
+            🌓
+          </button>
+          <button
+            onClick={logout}
+            className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded-full shadow transition-colors duration-200"
+          >
+            Logout
+          </button>
+        </div>
       </nav>
 
       <main className="flex-1 p-8">
@@ -128,21 +141,44 @@ function App() {
         >
           <input
             type="text"
-            className="p-3 border-2 border-orange-300 rounded-xl w-2/3 shadow focus:outline-none focus:ring-2 focus:ring-orange-400"
+            className="p-3 border-2 border-orange-300 rounded-xl w-2/3 shadow focus:outline-none focus:ring-2 focus:ring-orange-400 dark:bg-gray-700 dark:text-white"
             placeholder="Add a task"
           />
           <button
             type="submit"
             className="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200"
           >
-            Add
+            {loading ? (
+              <svg
+                className="animate-spin h-5 w-5 mx-auto"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                />
+              </svg>
+            ) : (
+              "Add"
+            )}
           </button>
         </form>
 
         <div className="mb-6 flex gap-4 justify-center">
           <select
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="p-2 border-2 border-orange-300 rounded-lg bg-white shadow-sm hover:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all duration-200"
+            className="p-2 border-2 border-orange-300 rounded-lg bg-white dark:bg-gray-700 dark:text-white shadow-sm hover:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all duration-200"
             value={filterStatus}
           >
             <option value="all">All Status</option>
@@ -151,7 +187,7 @@ function App() {
           </select>
           <select
             onChange={(e) => setFilterPriority(e.target.value)}
-            className="p-2 border-2 border-orange-300 rounded-lg bg-white shadow-sm hover:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all duration-200"
+            className="p-2 border-2 border-orange-300 rounded-lg bg-white dark:bg-gray-700 dark:text-white shadow-sm hover:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all duration-200"
             value={filterPriority}
           >
             <option value="all">All Priorities</option>
@@ -171,12 +207,12 @@ function App() {
           {filteredTasks.map((task) => (
             <li
               key={task._id}
-              className="p-5 bg-white rounded-2xl shadow-md border border-orange-200 hover:bg-orange-50 hover:shadow-xl transition duration-300"
+              className="p-5 bg-white dark:bg-gray-700 rounded-2xl shadow-md border border-orange-200 hover:bg-orange-50 dark:hover:bg-gray-600 hover:shadow-xl transition duration-300"
             >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="flex-1">
-                  <span className="text-lg text-orange-800">{task.text}</span>
-                  <span className="ml-2 text-sm text-gray-500">
+                  <span className="text-lg text-orange-800 dark:text-orange-300">{task.text}</span>
+                  <span className="ml-2 text-sm text-gray-500 dark:text-gray-300">
                     ({task.status}, {task.priority})
                   </span>
                 </div>
@@ -193,10 +229,8 @@ function App() {
                   </button>
                   <select
                     value={task.priority}
-                    onChange={(e) =>
-                      updateTaskPriority(task._id, e.target.value)
-                    }
-                    className="p-2 border-2 border-orange-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+                    onChange={(e) => updateTaskPriority(task._id, e.target.value)}
+                    className="p-2 border-2 border-orange-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 dark:bg-gray-600 dark:text-white"
                   >
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
