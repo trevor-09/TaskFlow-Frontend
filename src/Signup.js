@@ -47,19 +47,21 @@ function Signup() {
         className="space-y-4"
       >
         <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          placeholder="Username"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          placeholder="Password"
-        />
+  type="text"
+  value={username}
+  onChange={(e) => setUsername(e.target.value)}
+  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
+  placeholder="Username"
+/>
+
+<input
+  type="password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
+  placeholder="Password"
+/>
+
         <button
           type="submit"
           disabled={authLoading}
