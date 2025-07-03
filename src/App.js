@@ -49,7 +49,6 @@ function App() {
   useEffect(() => {
     if (token) {
       fetchTasks(token);
-      // Focus input when token is available
       if (inputRef.current) {
         inputRef.current.focus();
       }
@@ -85,7 +84,6 @@ function App() {
       const newTask = await response.json();
       setTasks([...tasks, newTask]);
       setNewTaskText("");
-      // Maintain focus after adding
       inputRef.current?.focus();
     } catch (error) {
       console.error("Error adding task:", error);
@@ -211,7 +209,6 @@ function App() {
                     backgroundColor: theme.bg,
                     borderColor: theme.border,
                     color: theme.text,
-                    focusRingColor: theme.primary,
                   }}
                   placeholder="What needs to be done?"
                   autoFocus
@@ -258,7 +255,6 @@ function App() {
                 backgroundColor: theme.cardBg,
                 borderColor: theme.border,
                 color: theme.text,
-                focusRingColor: theme.primary,
               }}
               value={filterStatus}
             >
@@ -279,7 +275,6 @@ function App() {
                 backgroundColor: theme.cardBg,
                 borderColor: theme.border,
                 color: theme.text,
-                focusRingColor: theme.primary,
               }}
               value={filterPriority}
             >
@@ -369,7 +364,6 @@ function App() {
                           backgroundColor: theme.bg,
                           borderColor: theme.border,
                           color: theme.text,
-                          focusRingColor: theme.primary,
                         }}
                       >
                         <option value="low">Low</option>
