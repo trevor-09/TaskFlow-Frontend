@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,6 +16,7 @@ function App() {
   const [filterPriority, setFilterPriority] = useState("all");
   const [loading, setLoading] = useState(false);
   const [newTaskText, setNewTaskText] = useState("");
+  const inputRef = useRef(null);
 
   // Color themes
   const theme = {
@@ -46,7 +47,13 @@ function App() {
   };
 
   useEffect(() => {
-    if (token) fetchTasks(token);
+    if (token) {
+      fetchTasks(token);
+      // Focus input when token is available
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }
   }, [token]);
 
   // Auth functions
@@ -56,7 +63,7 @@ function App() {
     setTasks([]);
   };
 
-  // Task CRUD operations
+  // Task operations
   const addTask = async (e) => {
     e.preventDefault();
     if (!newTaskText.trim()) return;
@@ -78,6 +85,8 @@ function App() {
       const newTask = await response.json();
       setTasks([...tasks, newTask]);
       setNewTaskText("");
+      // Maintain focus after adding
+      inputRef.current?.focus();
     } catch (error) {
       console.error("Error adding task:", error);
     } finally {
@@ -192,6 +201,7 @@ function App() {
               </label>
               <div className="flex flex-col sm:flex-row gap-4">
                 <input
+                  ref={inputRef}
                   id="task-input"
                   type="text"
                   value={newTaskText}
@@ -204,6 +214,7 @@ function App() {
                     focusRingColor: theme.primary,
                   }}
                   placeholder="What needs to be done?"
+                  autoFocus
                 />
                 <button
                   type="submit"
