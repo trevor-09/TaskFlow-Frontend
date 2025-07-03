@@ -34,7 +34,7 @@ function Login({ setToken }) {
 
   return (
     <div className="max-w-md mx-auto mt-16 p-8 bg-white shadow-xl rounded-xl border border-gray-200">
-      <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">Welcome Back 👋</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">Login</h2>
       {authError && <p className="text-red-500 text-center mb-4">{authError}</p>}
 
       <form
