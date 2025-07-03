@@ -176,8 +176,13 @@ function App() {
                     <div className="flex-1">
                       <h2 className="text-lg font-semibold mb-1 text-gray-800">{task.text}</h2>
                       <p className="text-sm text-gray-500">
-                        Status: {task.status} | Priority: {task.priority}
-                      </p>
+  Status: {task.status} | Priority: {task.priority}
+  <br />
+  <span className="text-xs text-gray-400">
+    Added: {new Date(task.createdAt).toLocaleString()}
+  </span>
+</p>
+
                     </div>
                     <div className="flex flex-wrap gap-2 items-center">
                       <button
