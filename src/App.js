@@ -105,7 +105,7 @@ function App() {
     <div className="min-h-screen bg-gray-50 text-gray-800">
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm">
-        <h1 className="text-2xl font-bold tracking-tight text-blue-600">📋 MERN To-Do</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-blue-600">📋 TaskFlow</h1>
         <button
           onClick={logout}
           className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md shadow"
@@ -221,7 +221,7 @@ function App() {
 
       {/* Footer */}
       <footer className="text-center text-sm text-gray-500 py-6">
-        © 2025 MERN To-Do App. All rights reserved.
+        © 2025 TaskFlow App. All rights reserved.
       </footer>
     </div>
   );
