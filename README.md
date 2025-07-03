@@ -2,7 +2,7 @@
 
 This is the **React frontend** for TaskFlow — a clean, modern task management web app.
 
-> 🔗 Live site: [todofrontend-9d0i.onrender.com](https://todofrontend-9d0i.onrender.com)
+> 🔗 Live site: [https://todofrontend-9d0i.onrender.com](https://todofrontend-9d0i.onrender.com)
 
 ---
 
@@ -26,11 +26,50 @@ This is the **React frontend** for TaskFlow — a clean, modern task management 
 
 ---
 
+## 🛠️ Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/trevor-09/TaskFlow-Frontend.git
+cd TaskFlow-Frontend
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the Application
+
+```bash
+npm start
+```
+
+Runs at: `http://localhost:3000`
+
+> ⚠️ Ensure the backend server is also running and accessible at:
+> [https://todobackend-kqc1.onrender.com](https://todobackend-kqc1.onrender.com)
+
+---
+
+## 🔗 Backend API
+
+This frontend connects to the backend hosted at:
+
+```
+https://todobackend-kqc1.onrender.com
+```
+
+---
+
+---
+
 ## 🪄 License
 
-This project is open for educational and personal portfolio use. Feel free to fork and modify.
+This project is open for educational and personal portfolio use.  
 
 ---
 
 > Made by Abhay Raj
-
